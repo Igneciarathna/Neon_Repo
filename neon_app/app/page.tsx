@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic"; // ⬅ important
 
 export default async function Home() {
-  const res = await fetch("https://neon-9n15pncuu-igneciarathnas-projects.vercel.app/api/users", {
+  const res = await fetch("https://neonproj-9m7x8vnzn-igneciarathnas-projects.vercel.app/api/users", {
     method: "GET",
     cache: "no-store", // ⬅ makes data always fresh
   });

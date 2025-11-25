@@ -1,17 +1,15 @@
-// File: app/api/users/route.ts
-import { Pool } from '@neondatabase/serverless';
-import { NextResponse } from 'next/server';
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+// app/api/users/route.ts
+import { neon } from "@neondatabase/serverless";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const { rows } = await pool.query('SELECT * FROM users LIMIT 10');
+    const sql = neon(process.env.DATABASE_URL!);
+
+    const rows = await sql`SELECT * FROM users LIMIT 10`;
     return NextResponse.json({ users: rows });
-  } catch (error) {
-    return NextResponse.json(
-      { error: error },
-      { status: 500 }
-    );
+  } catch (error: any) {
+    console.error("API ERROR:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
