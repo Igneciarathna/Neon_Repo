@@ -8,8 +8,8 @@ export async function GET() {
 
     const rows = await sql`SELECT * FROM users LIMIT 10`;
     return NextResponse.json({ users: rows });
-  } catch (error: any) {
+  } catch (error) {
     console.error("API ERROR:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }
